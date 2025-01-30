@@ -1,17 +1,51 @@
+import { useState } from "react";
+import { products } from "../../../products";
 import ProductCard from "../../common/productCard/ProductCard";
+import { useEffect } from "react";
 
-const ItemListContainer = ({ greeting }) => {
-  // { gretting: "hola como estas"}
-  //   console.log(props.gretting);
-  //   console.log(props.otroSaludo);
-  console.log("otro log");
+const ItemListContainer = () => {
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    const getProducts = new Promise((resolve, reject) => {
+      let permiso = true;
+      if (permiso) {
+        resolve(products);
+      } else {
+        reject({ status: 400, message: "algo salio mal" });
+      }
+    });
+
+    // let items = []
+    getProducts
+      .then((res) => {
+        setItems(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  // {}.title
+  // undefined
+  // console.log(items[0]?.title);
   return (
     <div>
-      <h2>{greeting}</h2>
-      <ProductCard title="nike" price={200} stock={1} />
-      <ProductCard title="puma" price={300} stock={31} />
-      <ProductCard title="wilson" price={500} stock={2} />
-      <ProductCard title="jaguar" price={100} stock={14} />
+      <h2>Aca van a ir los productos</h2>
+      {items.map((item) => {
+        return (
+          <ProductCard
+            key={item.id}
+            price={item.price}
+            title={item.title}
+            stock={item.stock}
+            imageUrl={item.imageUrl}
+            id={item.id}
+            description={item.description}
+            category={item.category}
+          />
+        );
+      })}
     </div>
   );
 };
