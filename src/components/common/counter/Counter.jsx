@@ -1,41 +1,41 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-const Counter = () => {
+const Counter = ({ item }) => {
   const [contador, setContador] = useState(1);
-  const [nombre, setNombre] = useState("pepe");
-  const [variable, setVariable] = useState(null);
 
-  const cambiarNombre = () => {
-    if (nombre === "pepe") {
-      setNombre("juan");
+  const sumar = () => {
+    if (contador < item.stock) {
+      setContador(contador + 1);
     } else {
-      setNombre("pepe");
+      alert("stock maximo");
     }
   };
 
-  useEffect(() => {
-    console.log("una peticion a un servidor en la india");
-    // setVariable([]);
-  }, [nombre, contador]); // array de dependencias
-
-  console.log("una peticion fuera del effect");
-
-  const sumar = () => {
-    setContador(contador + 1);
+  const restar = () => {
+    if (contador > 1) {
+      setContador(contador - 1);
+    } else {
+      alert("minimo 1 producto");
+    }
   };
 
-  const restar = () => {
-    setContador(contador - 1);
+  // cart = [ {} ]
+  const onAdd = () => {
+    console.log("agregar al carrito");
+    // console.log(item);
+    // console.log(contador);
+    let objetoParaElCarrito = { ...item, quantity: contador };
+    console.log(objetoParaElCarrito);
   };
 
   return (
     <div>
-      <button onClick={restar}>restar</button>
-      <h2>{contador}</h2>
-      {/* {variable.map()} */}
-      <button onClick={sumar}>sumar</button>
-      <button onClick={cambiarNombre}>Cambiar nombre</button>
-      <h2>{nombre}</h2>
+      <div style={{ display: "flex", gap: "20px" }}>
+        <button onClick={restar}>restar</button>
+        <h2>{contador}</h2>
+        <button onClick={sumar}>sumar</button>
+      </div>
+      <button onClick={onAdd}>Agregar al carrito</button>
     </div>
   );
 };
