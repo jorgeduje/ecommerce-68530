@@ -1,3 +1,4 @@
+import TestMaterial from "./components/common/testMaterial/TestMaterial";
 import Navbar from "./components/layouts/navbar/Navbar";
 import { ItemDetail } from "./components/pages/itemDetail/ItemDetail";
 import ItemListContainer from "./components/pages/itemListContainer/ItemListContainer";
@@ -5,9 +6,10 @@ import ItemListContainer from "./components/pages/itemListContainer/ItemListCont
 function App() {
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <ItemListContainer />
-      <ItemDetail />
+      {/* <ItemDetail /> */}
+      {/* <TestMaterial /> */}
     </div>
   );
 }
