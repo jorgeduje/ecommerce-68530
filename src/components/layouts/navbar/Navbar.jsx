@@ -29,7 +29,7 @@ const Navbar = () => {
           listStyle: "none",
         }}
       >
-        <li>Todas</li>
+        <Link to="/">Todas</Link>
         <Link to="/category/urbanas">Urbanas</Link>
         <Link to="/category/deportivas">Deportivas</Link>
       </ul>
