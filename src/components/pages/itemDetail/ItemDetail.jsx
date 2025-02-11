@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { products } from "../../../products";
 import Counter from "../../common/counter/Counter";
+import { useParams } from "react-router";
 
 export const ItemDetail = () => {
-  let id = "1";
+  const { id } = useParams();
 
+  // id de useParams
   const [item, setItem] = useState({});
 
   useEffect(() => {

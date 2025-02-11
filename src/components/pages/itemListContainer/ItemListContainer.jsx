@@ -2,15 +2,27 @@ import { useState } from "react";
 import { products } from "../../../products";
 import ProductCard from "../../common/productCard/ProductCard";
 import { useEffect } from "react";
+import { useParams } from "react-router";
 
 const ItemListContainer = () => {
+  const { name } = useParams();
+
   const [items, setItems] = useState([]);
 
   useEffect(() => {
+    // let arrayFiltrado;
+    // if (name) {
+    //   arrayFiltrado = products.filter((elemento) => elemento.category === name);
+    // }
+
+    let arrayFiltrado = products.filter(
+      (elemento) => elemento.category === name
+    );
+
     const getProducts = new Promise((resolve, reject) => {
       let permiso = true;
       if (permiso) {
-        resolve(products);
+        resolve(name ? arrayFiltrado : products);
       } else {
         reject({ status: 400, message: "algo salio mal" });
       }
@@ -24,14 +36,21 @@ const ItemListContainer = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [name]);
 
   // {}.title
   // undefined
   // console.log(items[0]?.title);
   return (
-    <div>
-      <h2>Aca van a ir los productos</h2>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        flexWrap: "wrap",
+        gap: "20px",
+        marginTop: "16px",
+      }}
+    >
       {items.map((item) => {
         return (
           <ProductCard
