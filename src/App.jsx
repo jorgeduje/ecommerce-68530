@@ -1,5 +1,6 @@
 import Navbar from "./components/layouts/navbar/Navbar";
 import Cart from "./components/pages/cart/Cart";
+import Checkout from "./components/pages/checkout/Checkout";
 import { ItemDetail } from "./components/pages/itemDetail/ItemDetail";
 import ItemListContainer from "./components/pages/itemListContainer/ItemListContainer";
 
@@ -14,6 +15,7 @@ function App() {
         <Route path="/category/:name" element={<ItemListContainer />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/itemDetail/:id" element={<ItemDetail />} />
+        <Route path="/checkout" element={<Checkout />} />
 
         <Route path="*" element={<h2>404 not found</h2>} />
       </Routes>
