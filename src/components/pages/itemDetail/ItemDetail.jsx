@@ -5,6 +5,7 @@ import { useParams } from "react-router";
 
 export const ItemDetail = () => {
   const { id } = useParams();
+  // const [cart, setCart] = useState([]);
 
   // id de useParams
   const [item, setItem] = useState({});
