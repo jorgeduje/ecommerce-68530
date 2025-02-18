@@ -2,7 +2,7 @@ export let products = [
   {
     id: "1",
     title: "zapatila nike",
-    price: 12432,
+    price: 150,
     description: "estas son las mejores",
     imageUrl:
       "https://res.cloudinary.com/dnqfh2chg/image/upload/v1686581567/images_teykwq.jpg",
@@ -12,7 +12,7 @@ export let products = [
   {
     id: "2",
     title: "wilson advance",
-    price: 14500,
+    price: 200,
     stock: 5,
     description: "Ultra livianas y cuentan con camara de aire",
     category: "deportivas",
@@ -22,7 +22,7 @@ export let products = [
   {
     id: "3",
     title: "Puma",
-    price: 19000,
+    price: 500,
     stock: 5,
     description:
       "Las clasicas zapatillas que van para cualquier momento del dia",
@@ -33,7 +33,7 @@ export let products = [
   {
     id: "4",
     title: "Jaguar",
-    price: 17800,
+    price: 800,
     stock: 5,
     description: "Zapatillas de ultima generacion para el deporte",
     category: "urbanas",
