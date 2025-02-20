@@ -3,14 +3,32 @@ import { createContext, useState } from "react";
 export const CartContext = createContext();
 
 const CartContextProvider = ({ children }) => {
-  const [cart, setCart] = useState([]); // [{} {} {}]
+  const [cart, setCart] = useState([]); // [{2}{3}{5}]
 
   const addToCart = (product) => {
-    // setCart( product ) //  {}
-    // setCart( [ product ] ) // [ {puma}  ] - [ {nike} ]
-    // VERIFICAR SI YA EXISTE O NO EN EL CART
-    setCart([...cart, product]);
+    // some siempre devuelve un booleano
+
+    let existe = cart.some((elemento) => elemento.id === product.id);
+    if (existe) {
+      // generar un nuevo array, que tenga lo mismo que tenia , pero el producto
+      // en cuestion, va cambiar sus cantidades
+      const nuevoArray = cart.map((elemento) => {
+        // [{2}{3}{8}]
+        if (product.id === elemento.id) {
+          return {
+            ...elemento,
+            quantity: elemento.quantity + product.quantity,
+          };
+        } else {
+          return elemento;
+        }
+      });
+      setCart(nuevoArray);
+    } else {
+      setCart([...cart, product]);
+    }
   };
+
   const resetCart = () => {
     setCart([]);
   };
