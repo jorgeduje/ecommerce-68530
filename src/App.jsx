@@ -7,11 +7,13 @@ import ItemListContainer from "./components/pages/itemListContainer/ItemListCont
 import { BrowserRouter, Routes, Route } from "react-router";
 import CartContextProvider from "./context/CartContext";
 import DarkModeContextProvider from "./context/DarkModeContext";
+import { Toaster } from "sonner";
 
 function App() {
   return (
     <BrowserRouter>
       <CartContextProvider>
+        <Toaster duration={2000} richColors />
         {/* <DarkModeContextProvider> */}
         <Navbar />
         <Routes>
