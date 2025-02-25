@@ -1,6 +1,6 @@
 export let products = [
   {
-    id: "1",
+    // id: "1",
     title: "zapatila nike",
     price: 150,
     description: "estas son las mejores",
@@ -10,7 +10,7 @@ export let products = [
     category: "deportivas",
   },
   {
-    id: "2",
+    // id: "2",
     title: "wilson advance",
     price: 200,
     stock: 5,
@@ -20,7 +20,7 @@ export let products = [
       "https://res.cloudinary.com/dnqfh2chg/image/upload/v1669430010/foc364fsakkzmausrovn.jpg",
   },
   {
-    id: "3",
+    // id: "3",
     title: "Puma",
     price: 500,
     stock: 5,
@@ -31,7 +31,7 @@ export let products = [
       "https://res.cloudinary.com/dnqfh2chg/image/upload/v1669430165/images_lujpmr.jpg",
   },
   {
-    id: "4",
+    // id: "4",
     title: "Jaguar",
     price: 800,
     stock: 5,
