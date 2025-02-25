@@ -1,57 +1,53 @@
 import { useState } from "react";
-import { products } from "../../../products";
+
 import ProductCard from "../../common/productCard/ProductCard";
 import { useEffect } from "react";
 import { useParams } from "react-router";
-import { Box, CircularProgress, Skeleton, Stack } from "@mui/material";
-import { PropagateLoader } from "react-spinners";
+import { Box } from "@mui/material";
 import ProductSkeleton from "../../common/productSkeleton/ProductSkeleton";
-import { toast } from "sonner";
+import { db } from "../../../firebaseConfig";
+import { getDocs, collection, addDoc, query, where } from "firebase/firestore";
+// import { products } from "../../../products";
 
 const ItemListContainer = () => {
   const { name } = useParams();
 
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState([]); // {id, title ....}
 
   useEffect(() => {
-    let arrayFiltrado = products.filter(
-      (elemento) => elemento.category === name
-    );
+    const coleccionDeProductos = collection(db, "products");
+    let consulta = coleccionDeProductos;
 
-    const getProducts = new Promise((resolve, reject) => {
-      let permiso = true;
-      if (permiso) {
-        resolve(name ? arrayFiltrado : products);
-      } else {
-        reject({ status: 400, message: "algo salio mal" });
-      }
-    });
+    if (name) {
+      const coleccionFiltrada = query(
+        coleccionDeProductos,
+        where("category", "==", name)
+      );
+      consulta = coleccionFiltrada;
+    }
 
-    getProducts
-      .then((res) => {
-        setItems(res);
-      })
-      .catch((error) => {
-        console.log(error);
+    const getProducts = getDocs(consulta);
+
+    getProducts.then((res) => {
+      let newArray = res.docs.map((elemento) => {
+        return { id: elemento.id, ...elemento.data() };
       });
+      setItems(newArray);
+    });
   }, [name]);
 
-  // if (items.length === 0) {
-  //   return  <CircularProgress />
+  // const rellenar = () => {
+  //   let productsCollecion = collection(db, "products");
 
-  // }
-  // <Box
-  //   sx={{
-  //     display: "flex",
-  //     justifyContent: "center",
-  //   }}
-  // >
-  //   <PropagateLoader size={40} color="red" />
-  // </Box>;
+  //   products.forEach((product) => {
+  //     addDoc(productsCollecion, product);
+  //   });
+  // };
 
   return (
     <div>
       <h1>Bienvenido a mi tienda</h1>
+      {/* <button onClick={rellenar}>Rellenar db</button> */}
 
       {items.length === 0 ? (
         <Box sx={{ display: "flex", justifyContent: "center", gap: "20px" }}>
@@ -95,3 +91,10 @@ export default ItemListContainer;
 // if con return temprano
 // ternario
 // el and
+
+// const persona = {
+//   name: "pepe",
+//   apellido: "perez"
+// }
+
+// persona.apellido = "perez"
