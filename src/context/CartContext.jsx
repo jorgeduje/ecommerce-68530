@@ -3,17 +3,12 @@ import { createContext, useState } from "react";
 export const CartContext = createContext();
 
 const CartContextProvider = ({ children }) => {
-  const [cart, setCart] = useState([]); // [{2}{3}{5}]
+  const [cart, setCart] = useState([]);
 
   const addToCart = (product) => {
-    // some siempre devuelve un booleano
-
     let existe = cart.some((elemento) => elemento.id === product.id);
     if (existe) {
-      // generar un nuevo array, que tenga lo mismo que tenia , pero el producto
-      // en cuestion, va cambiar sus cantidades
       const nuevoArray = cart.map((elemento) => {
-        // [{2}{3}{8}]
         if (product.id === elemento.id) {
           return {
             ...elemento,
@@ -34,15 +29,11 @@ const CartContextProvider = ({ children }) => {
   };
 
   const removeById = (id) => {
-    console.log(id);
-    // nuevo array ---> que tenga todos los elementos excepto el de este id
-    // el filter siempre siempre siempre devuelve un array
     const newArray = cart.filter((elemento) => elemento.id !== id);
     setCart(newArray);
   };
 
   const getTotalAmount = () => {
-    // reduce ---> reducir un array a una minima expresion
     let total = cart.reduce((acc, elemento) => {
       return acc + elemento.quantity * elemento.price;
     }, 0);
