@@ -27,13 +27,11 @@ const Checkout = () => {
 
     let refCollection = collection(db, "orders");
     const promiseResponse = addDoc(refCollection, order);
-    promiseResponse
-      .then((res) => {
-        setOrderId(res.id);
-        resetCart();
-        setIsLoading(false);
-      })
-      .catch((error) => console.log({ error }));
+    promiseResponse.then((res) => {
+      setOrderId(res.id);
+      resetCart();
+      setIsLoading(false);
+    });
 
     let productsCollection = collection(db, "products");
 
