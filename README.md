@@ -9,3 +9,7 @@
 ```
 hola como estas
 ```
+
+```javascript
+const x = "pepe";
+```
